@@ -21,14 +21,15 @@ LIB_SRC = libft/*.c
 OBJECTS = *.o
 
 all:
-	gcc -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
+	gcc -g -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
 	$(NAME)/ft_printf.c \
 	$(NAME)/handle_*.c \
 	$(NAME)/char_detectors.c \
 	$(NAME)/string_parser.c \
-	$(NAME)/string_interpreter.c
+	$(NAME)/string_interpreter.c \
+	$(NAME)/errors.c
 	ar rcs libftprintf.a $(OBJECTS)
-	gcc -Wall -Wextra -Werror main.c libftprintf.a
+	gcc -g -Wall -Wextra -Werror main.c libftprintf.a
 
 clean:
 	rm -f *.o
