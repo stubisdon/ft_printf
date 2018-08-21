@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_newline.c                                   :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkotov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/26 13:42:36 by dkotov            #+#    #+#             */
-/*   Updated: 2018/07/26 13:44:14 by dkotov           ###   ########.fr       */
+/*   Created: 2018/08/19 15:01:53 by dkotov            #+#    #+#             */
+/*   Updated: 2018/08/19 15:01:57 by dkotov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf/ft_printf.h"
 
-void	handle_char(char c)
+int		ft_wstrlen(wchar_t *wstr)
 {
-	ft_putchar(c);
+	int	i;
+	int len;
+
+	i = 0;
+	len = 0;
+	while (wstr[i])
+	{
+		len += ft_wchar_len(wstr[i]);
+		i++;
+	}
+	return (len);
 }

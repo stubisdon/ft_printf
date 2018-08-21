@@ -16,17 +16,28 @@ int	ft_printf(const char *format, ...)
 {
 	va_list		args;
 	i_cont		*info;
-	char 		*string_to_print;
-	int 		number_of_printed_characters;
+	int 		printed_characters;
+	int			position;
 
-	number_of_printed_characters = 0; // to figure out the way of counting
-	string_to_print = NULL;
+	printed_characters = 0;
+	position = 0;
 	info = (i_cont *)malloc(sizeof(i_cont));
-
 	va_start(args, format);
-	parse_string(format, info);
+	while (format[position] != '\0')
+	{
+		struct_init(info, &args, &position);
+		parse_string(format, info);
+		error_handle(info);
+		string_interpret(info);
+		string_print(info);
+		printed_characters += ft_strlen(info->str_input);
+		printed_characters += ft_strlen(info->res);
+		if (info->wres != NULL)
+			printed_characters += ft_wstrlen(info->wres);
+		position = info->position;
+	}
 	va_end(args);
-	return (number_of_printed_characters);
+	return (printed_characters);
 }
 
 

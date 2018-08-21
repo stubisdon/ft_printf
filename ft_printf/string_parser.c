@@ -12,10 +12,11 @@
 
 #include "ft_printf.h"
 
-void struct_init(i_cont *info)
+void struct_init(i_cont *info, va_list *args, int *position)
 {
 	int	i;
 
+	info->position = *position;
 	i = -1;
 	while (++i <= FLAGS)
 		info->flags[i] = -1;
@@ -23,16 +24,14 @@ void struct_init(i_cont *info)
 	while (++i <= L_MODS)
 		info->length_mods[i] = -1;
 	info->str_input = "";
-	info->str_output = "";
+	info->res = "";
+	info->wres = NULL;
 	info->width = "";
 	info->precision = "";
 	info->specifier = 0;
+	info->args = args;
 	info->next = 0;
 }
-
-/*
-** excluded zero from flags due to false read of "20" => f_Zero == 1
-*/
 
 void parse_flag(const char *format, i_cont *info)
 {
@@ -60,8 +59,8 @@ void parse_precision(const char *format, i_cont *info)
 {
 	if (is_precision(*format) == 1)
 	{
-		format++;
-		while (ft_isdigit(*format) == 1)
+		info->flags[f_Dot] = 1;
+		while (ft_isdigit(*(++format)) == 1)
 			info->precision = ft_strcharjoin(info->precision, *format);
 	}
 }
@@ -84,32 +83,27 @@ void parse_specifier(const char *format, i_cont *info)
 void parse_string(const char *format, i_cont *info)
 {
 	int	i;
-	i = 0;
 
-	struct_init(info);
-	while (*format)
+	i = info->position;
+	while (format[i] != '%' && format[i] != '\0')
 	{
-		while (ft_isascii(*format) == 1 && *format != '%')
+		info->str_input = ft_strcharjoin(info->str_input, format[i]);
+		i++;
+	}
+	if (format[i] == '%')
+	{
+		i++;
+		while (is_specifier(format[i]) == 0)
 		{
-			info->str_input = ft_strcharjoin(info->str_input, *format);
-			format++;
+			parse_flag(&format[i], info);
+			parse_width(&format[i], info);
+			parse_precision(&format[i], info);
+			parse_length(&format[i], info);
 			i++;
 		}
-		if (*format == '%')
-		{
-			format++;
-			while (is_specifier(*format) == 0)
-			{
-				parse_flag(format, info);
-				parse_width(format, info);
-				parse_precision(format, info);
-				parse_length(format, info);
-				format++;
-			}
-			parse_specifier(format, info);
-		}
-		error_handle(info);
-		// string_print()
-		format++;
+		parse_specifier(&format[i], info);
 	}
+	if (info->specifier)
+		i++;
+	info->position = i;
 }

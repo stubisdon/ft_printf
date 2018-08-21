@@ -1,45 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_string.c                                    :+:      :+:    :+:   */
+/*   handle_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkotov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/26 13:47:13 by dkotov            #+#    #+#             */
-/*   Updated: 2018/07/26 13:47:45 by dkotov           ###   ########.fr       */
+/*   Created: 2018/08/21 13:06:38 by dkotov            #+#    #+#             */
+/*   Updated: 2018/08/21 13:06:46 by dkotov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void	apply_precision(i_cont *info)
-{
-	int len;
-	int i;
-
-	len = 0;
-	i = 0;
-	if (info->flags[f_Dot] == 1)
-		info->precision = "0";
-	if (info->specifier == 's' && info->length_mods[l_l] != 1)
-	{
-		if (ft_strlen(info->precision) > 0)
-			if (ft_atoi(info->precision) < (int)ft_strlen(info->res))
-				info->res[ft_atoi(info->precision)] = '\0';
-	}
-	else
-	{
-		if (ft_atoi(info->precision) < ft_wstrlen(info->wres))
-		{
-			while (len <= ft_atoi(info->precision))
-			{
-				len += ft_wchar_len(info->wres[i]);
-				i++;
-			}
-		//	info->wres[--i] = 0;
-		}
-	}
-}
 
 static void	apply_widthwchar(i_cont *info)
 {
@@ -69,7 +40,7 @@ static void	apply_width(i_cont *info)
 {
 	int len;
 
-	if (info->specifier == 's' && info->length_mods[l_l] != 1)
+	if (info->specifier == 'c' && info->length_mods[l_l] != 1)
 	{
 		if (ft_atoi(info->width) > (len = ft_strlen(info->res)))
 		{
@@ -94,31 +65,47 @@ static void	apply_width(i_cont *info)
 		apply_widthwchar(info);
 }
 
-void		handle_str(i_cont *info)
+static void	print_specialcase(i_cont *info)
 {
-	wchar_t *warg;
-	char	*sarg;
+	int	i;
 
-	if (info->specifier == 's' && info->length_mods[l_l] != 1)
+	i = 0;
+	while (info->res[i])
 	{
-		if ((sarg = va_arg(info->args[0], char*)))
-			info->res = ft_strdup(sarg);
-		else
-			info->res = ft_strdup("(null)");
-		if (ft_strcmp(info->res, "") == 0)
+		ft_putchar(info->res[i]);
+		i++;
+	}
+	info->position += i;
+	ft_putchar('\0');
+	info->position++;
+	info->specifier = '\0';
+}
+
+void		handle_char(i_cont *info)
+{
+	char	res;
+	int		flag;
+
+	flag = 0;
+	if (info->specifier == 'c' && info->length_mods[l_l] != 1)
+	{
+		if (!(info->res = ft_strnew(1)))
 			error_print(1);
+		res = va_arg(info->args[0], int);
+		if (res == 0)
+			flag = 1;
+		info->res[0] = res;
 	}
 	else
 	{
-		if ((warg = va_arg(info->args[0], wchar_t*)))
-			info->wres = ft_wstrdup(warg);
-		else
-			info->wres = ft_wstrdup(L"(null)");
-		if (!info->wres)
+		if (!(info->wres = ft_wstrnew(1)))
 			error_print(1);
+		info->wres[0] = va_arg(info->args[0], wchar_t);
 	}
-	if (ft_atoi(info->precision) >= 0)
-		apply_precision(info);
-	if (ft_atoi(info->width) > 0)
+	if (flag == 1)
+		info->width--;
+	if (info->width > 0)
 		apply_width(info);
+	if (flag == 1)
+		print_specialcase(info);
 }

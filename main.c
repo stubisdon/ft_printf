@@ -12,33 +12,50 @@
 
 #include "ft_printf/ft_printf.h"
 #include <stdio.h>
+#include <locale.h>
 
 int	main()
 {
-	long long number = 100;
-	// int bumber = 2;
-	// char *str = "привет!";
-	// unsigned int positive = 12312344;
+	int printed_characters;
+	int number = -100;
+	int bumber = 0;
+	char *str = "koko!";
+	unsigned int positive = 12312344;
 
-	// wchar_t *newstring = L"Another text 汉字 привет";
+//	wchar_t *newstring = L"Another text 汉字 привет";
 
 /*
 ** parsing tests
 */
 
-	ft_printf("m:%020lld", number);
-	printf("m:%020lld", number);
+	// printed_characters = printf("printf:%.5d %d\n", number, bumber);
+	// printf("characters printed by printf: %d\n", printed_characters);
+	// printed_characters = ft_printf("printz:%.5d %d\n", number, bumber);
+	// printf("characters printed by printz: %d\n", printed_characters);
 
 /*
 ** basic tests
 */
-	// ft_printf("%d %d %s %% %u %o %x %X %p\n", number, bumber, str, positive, positive, positive, positive, str);
-	// printf("%d %d %s %% %u %o %x %X %p\n", number, bumber, str, positive, positive, positive, positive, str);
+	ft_printf("%d %d %s %% %u %o %x %X %p\n", number, bumber, str, positive, positive, positive, positive, str);
+	printf("%d %d %s %% %u %o %x %X %p\n", number, bumber, str, positive, positive, positive, positive, str);
+	printed_characters = ft_printf("%c\n", 'C');
+	ft_printf("%d\n", printed_characters);
+	printed_characters = printf("%c\n", 'C');
+	printf("%d\n", printed_characters);
+
 /*
 ** advanced tests
 */
-	// ft_printf("%S\n", newstring);
-	// printf("%S\n", newstring);
+	// setlocale(LC_ALL, "");
+	// printed_characters = printf("%S\n", newstring);
+	// printf("wstring printed by printf: %d\n", printed_characters);
+	// printed_characters = ft_printf("%S\n", newstring);
+	// printf("wstring printed by printz: %d\n", printed_characters);
+	// printed_characters = printf("%p\n", str);
+	// printf("chars printed by printf: %d\n", printed_characters);
+	// printed_characters = ft_printf("%p\n", str);
+	// printf("chars printed by printz: %d\n", printed_characters);
+	// //printf("printf:%.d opo\n", number);
 
 /*
 ** flags

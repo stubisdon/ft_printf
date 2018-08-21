@@ -6,11 +6,11 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/03 16:12:37 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/21 13:18:14 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
 
 LIBFT = libft/libft
 
@@ -20,16 +20,18 @@ LIB_SRC = libft/*.c
 
 OBJECTS = *.o
 
-all:
+all: $(NAME)
+
+$(NAME):
 	gcc -g -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
-	$(NAME)/ft_printf.c \
-	$(NAME)/handle_*.c \
-	$(NAME)/char_detectors.c \
-	$(NAME)/string_parser.c \
-	$(NAME)/string_interpreter.c \
-	$(NAME)/errors.c
-	ar rcs libftprintf.a $(OBJECTS)
-	gcc -g -Wall -Wextra -Werror main.c libftprintf.a
+	ft_printf/ft_printf.c \
+	ft_printf/handle_*.c \
+	ft_printf/char_detectors.c \
+	ft_printf/string_parser.c \
+	ft_printf/string_interpreter.c \
+	ft_printf/errors.c
+	ar rcs $(NAME) $(OBJECTS)
+	gcc -g -Wall -Wextra -Werror main.c $(NAME)
 
 clean:
 	rm -f *.o
@@ -42,6 +44,3 @@ fclean: clean
 	rm -f libft/libft.h.gch
 
 re: fclean all
-
-debug:
-	gcc -Wall -Wextra -Werror $(LIB_SRC) $(NAME)/*.c -g
