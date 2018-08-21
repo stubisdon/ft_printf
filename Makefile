@@ -35,6 +35,7 @@ $(NAME):
 
 clean:
 	rm -f *.o
+	rm -f libft/*.o
 
 fclean: clean
 	rm -f a.out
@@ -42,5 +43,7 @@ fclean: clean
 	rm -f libftprintf.a
 	rm -f ft_printf/ft_printf.h.gch
 	rm -f libft/libft.h.gch
+	rm -f libft/libft.a
 
-re: fclean all
+re: fclean
+	make all
