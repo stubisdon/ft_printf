@@ -46,7 +46,7 @@ void parse_flag(const char *format, i_cont *info)
 
 void parse_width(const char *format, i_cont *info)
 {
-	if (ft_isdigit(*format) == 1)
+	if (ft_isdigit(*format) == 1 && info->flags[f_Dot] != 1)
 	{
 		if (*format != '0')
 			info->width = ft_strcharjoin(info->width, *format);

@@ -16,10 +16,10 @@
 
 int	main()
 {
-	int printed_characters;
-	int number = -100;
-	int bumber = 0;
-	char *str = "koko!";
+	// int printed_characters;
+	// int number = -100;
+	// int bumber = 0;
+	// char *str = "koko!";
 	unsigned int positive = 12312344;
 
 //	wchar_t *newstring = L"Another text 汉字 привет";
@@ -36,12 +36,14 @@ int	main()
 /*
 ** basic tests
 */
-	ft_printf("%d %d %s %% %u %o %x %X %p\n", number, bumber, str, positive, positive, positive, positive, str);
-	printf("%d %d %s %% %u %o %x %X %p\n", number, bumber, str, positive, positive, positive, positive, str);
-	printed_characters = ft_printf("%c\n", 'C');
-	ft_printf("%d\n", printed_characters);
-	printed_characters = printf("%c\n", 'C');
-	printf("%d\n", printed_characters);
+	   printf("printf:%#6.4O %#4o %010O\n", positive, positive, positive);
+
+	ft_printf("printz:%#6.4O %#4o %010O\n", positive, positive, positive);
+
+	// printed_characters = ft_printf("%c\n", 'C');
+	// ft_printf("%d\n", printed_characters);
+	// printed_characters = printf("%c\n", 'C');
+	// printf("%d\n", printed_characters);
 
 /*
 ** advanced tests

@@ -16,8 +16,8 @@ int undefined_behavior(i_cont *info)
 {
     if (info->flags[f_Hash] == 1)
     {
-        if (info->specifier != 'o' || info->specifier != 'x' || \
-        info->specifier != 'X')
+        if (info->specifier != 'o' && info->specifier != 'x' && \
+        info->specifier != 'X' && info->specifier != 'O')
             error_print(e_UndefinedBehavior);
     }
 /*
