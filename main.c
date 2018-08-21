@@ -20,7 +20,7 @@ int	main()
 	// int number = -100;
 	// int bumber = 0;
 	// char *str = "koko!";
-	unsigned int positive = 12312344;
+	// unsigned int positive = 12312344;
 
 //	wchar_t *newstring = L"Another text 汉字 привет";
 
@@ -36,9 +36,9 @@ int	main()
 /*
 ** basic tests
 */
-	   printf("printf:%#6.4O %#4o %010O\n", positive, positive, positive);
+	   printf("printf:%#o \n", 0);
 
-	ft_printf("printz:%#6.4O %#4o %010O\n", positive, positive, positive);
+	ft_printf("printz:%#o \n", 0);
 
 	// printed_characters = ft_printf("%c\n", 'C');
 	// ft_printf("%d\n", printed_characters);

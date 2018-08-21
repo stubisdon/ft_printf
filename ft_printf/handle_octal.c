@@ -69,11 +69,11 @@ static void	apply_precision(i_cont *info)
 			len++;
 		}
 	}
-	if (ft_strcmp(info->precision, "") == 0 && iszero == 1)
-	{
-		free(info->res);
-		info->res = ft_strdup("");
-	}
+	// if (ft_strcmp(info->precision, "") == 0 && iszero == 1)
+	// {
+	// 	free(info->res);
+	// 	info->res = ft_strdup("");
+	// }
 	apply_width(info, iszero);
 }
 
