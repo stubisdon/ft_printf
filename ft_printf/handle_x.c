@@ -71,7 +71,7 @@ static void	apply_precision(i_cont *info)
 			len++;
 		}
 	}
-	if (ft_atoi(info->precision) == 0 && iszero == 1)
+	if (info->flags[f_Dot] == 1 && iszero == 1)
 	{
 		free(info->res);
 		info->res = ft_strdup("");

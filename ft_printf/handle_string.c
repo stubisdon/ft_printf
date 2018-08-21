@@ -19,8 +19,8 @@ static void	apply_precision(i_cont *info)
 
 	len = 0;
 	i = 0;
-	if (info->flags[f_Dot] == 1)
-		info->precision = "0";
+	// if (info->flags[f_Dot] == 1)
+	// 	info->precision = "0";
 	if (info->specifier == 's' && info->length_mods[l_l] != 1)
 	{
 		if (ft_strlen(info->precision) > 0)
@@ -105,8 +105,8 @@ void		handle_str(i_cont *info)
 			info->res = ft_strdup(sarg);
 		else
 			info->res = ft_strdup("(null)");
-		if (ft_strcmp(info->res, "") == 0)
-			error_print(1);
+		// if (ft_strcmp(info->res, "") == 0)
+		// 	error_print(1);
 	}
 	else
 	{

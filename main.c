@@ -36,9 +36,9 @@ int	main()
 /*
 ** basic tests
 */
-	   printf("printf:%#o \n", 0);
-
-	ft_printf("printz:%#o \n", 0);
+	//    printf("%.2c\n", NULL);
+    //
+	// ft_printf("%.2c\n", NULL);
 
 	// printed_characters = ft_printf("%c\n", 'C');
 	// ft_printf("%d\n", printed_characters);
