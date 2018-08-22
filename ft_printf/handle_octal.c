@@ -69,11 +69,11 @@ static void	apply_precision(i_cont *info)
 			len++;
 		}
 	}
-	// if (ft_strcmp(info->precision, "") == 0 && iszero == 1)
-	// {
-	// 	free(info->res);
-	// 	info->res = ft_strdup("");
-	// }
+	if (info->flags[f_Dot] == 1 && iszero == 1 && info->flags[f_Hash] != 1)
+	{
+		free(info->res);
+		info->res = ft_strdup("");
+	}
 	apply_width(info, iszero);
 }
 

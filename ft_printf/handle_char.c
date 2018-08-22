@@ -77,7 +77,7 @@ static void	print_specialcase(i_cont *info)
 	}
 	info->position += i;
 	ft_putchar('\0');
-	info->position++;
+	// info->position++;
 	info->specifier = '\0';
 }
 
