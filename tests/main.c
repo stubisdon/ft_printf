@@ -37,7 +37,7 @@ int	main()
 ** basic tests
 */
 
-	ft_printf("%S\n", newstring);
+	ft_printf("%*S\n", newstring);
 	printf("\n");
 
 
@@ -84,8 +84,9 @@ int	main()
 
 // TODOS:
 // basic tests [y]
-// ft_printf.com []
+// ft_printf.com [] Makefile Segfault
 // moulitest [x]
+// leaks []
 // norminette []
 // ** DispatchTable []
 // delete comments []

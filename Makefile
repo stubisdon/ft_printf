@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/22 18:05:37 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/21 13:18:14 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJECTS = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
+	gcc -g -fsanitize=address -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
 	ft_printf/ft_printf.c \
 	ft_printf/handle_*.c \
 	ft_printf/char_detectors.c \
@@ -47,4 +47,4 @@ fclean: clean
 re: fclean all
 
 test:
-	gcc -g tests/main.c $(NAME)
+	gcc -g -fsanitize=address tests/main.c $(NAME)
