@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/22 17:22:26 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/21 13:18:14 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ $(NAME):
 	ft_printf/string_interpreter.c \
 	ft_printf/errors.c
 	ar rcs $(NAME) $(OBJECTS)
-	gcc -g tests/main.c $(NAME)
 
 clean:
 	rm -f *.o
@@ -45,5 +44,8 @@ fclean: clean
 	rm -f libft/libft.h.gch
 	rm -f libft/libft.a
 
-re: fclean 
+re: fclean
 	make all
+
+test:
+	gcc -g tests/main.c $(NAME)
