@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/22 18:02:41 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/22 18:05:37 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME):
 	ft_printf/string_parser.c \
 	ft_printf/string_interpreter.c \
 	ft_printf/errors.c
-	ar rcs $(NAME) $(OBJECTS)
+	ar rc $(NAME) $(OBJECTS)
 
 clean:
 	rm -f *.o
