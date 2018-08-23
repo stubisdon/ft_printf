@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/21 13:18:14 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/22 18:00:59 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,7 @@ fclean: clean
 	rm -f libft/libft.h.gch
 	rm -f libft/libft.a
 
-re: fclean
-	make all
+re: fclean all
 
 test:
 	gcc -g tests/main.c $(NAME)
