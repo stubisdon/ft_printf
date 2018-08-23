@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/22 18:00:59 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/22 18:02:41 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJECTS = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -g -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
+	gcc -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
 	ft_printf/ft_printf.c \
 	ft_printf/handle_*.c \
 	ft_printf/char_detectors.c \
