@@ -63,17 +63,13 @@ enum 				errors
 	e_UndefinedBehavior
 };
 
-/*
-**	pointer to function = ptof
-*/
+typedef	void 	(*ptof)(i_cont *);
 
-// typedef	ptof (*void)(void);
-//
-// typedef	struct	DispatchTable
-// {
-// 	char	specifier;
-// 	ptof	pointer;
-// }				DispatchTable;
+typedef	struct	DispatchTable
+{
+	char	specifier;
+	ptof	pointer;
+}				DispatchTable;
 
 int		ft_printf(const char *format, ...);
 
@@ -106,6 +102,7 @@ void	ft_wputstr(wchar_t *str);
 int		ft_wputchar(wchar_t c);
 void	ft_strtoupper(char **str);
 void	ft_strtolower(char **str);
+int		ft_putwchar(wchar_t wc);
 
 void	handle_int(i_cont *info);
 void	handle_str(i_cont *info);
@@ -115,6 +112,7 @@ void	handle_u(i_cont *info);
 void	handle_octal(i_cont *info);
 void	handle_x(i_cont *info);
 void	handle_percentage(i_cont *info);
+void	handle_binary(i_cont *info);
 void 	error_handle(i_cont *info);
 void	error_print(int error_num);
 

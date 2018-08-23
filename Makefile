@@ -31,7 +31,7 @@ $(NAME):
 	ft_printf/string_interpreter.c \
 	ft_printf/errors.c
 	ar rcs $(NAME) $(OBJECTS)
-	gcc -g -Wall -Wextra -Werror main.c $(NAME)
+	gcc -g tests/main.c $(NAME)
 
 clean:
 	rm -f *.o

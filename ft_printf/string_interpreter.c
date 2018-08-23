@@ -29,12 +29,10 @@ void string_interpret(i_cont *info)
         handle_octal(info);
     else if (info->specifier == 'c' || info->specifier == 'C')
         handle_char(info);
-    // else if (info->specifier == 'b' || info->specifier == 'B')
-    //     prepare_binary(info);
+    else if (info->specifier == 'b' || info->specifier == 'B')
+        handle_binary(info);
     else if (info->specifier == '%')
         handle_percentage(info);
-    // else if (!info->specifier)
-    //     string_print(info);
 }
 
 void string_print(i_cont *info)
@@ -42,9 +40,6 @@ void string_print(i_cont *info)
     if (ft_strcmp(info->res, "0") == 0 && ft_strcmp(info->precision, "") == 0\
             && info->flags[f_Dot] == 1)
         info->res = "";
-    // if (ft_strcmp(info->res, "0") == 0 && ft_strcmp(info->precision, "") == 0\
-    //         && info->flags[f_Hash] == 1)
-    //     info->res = "0";
     if (info->str_input)
         ft_putstr(info->str_input);
     if (info->res)
@@ -53,20 +48,24 @@ void string_print(i_cont *info)
         ft_wputstr(info->wres);
 }
 
-// void DispatchTable[] =
+// void map_specifier(i_cont *info)
 // {
-//     {"s",   handle_string(va_arg(args, char *))},
-//     //{"S",   handle_string_wide(va_arg(args, wchar_t *))},
-//     {"p",   handle_pointer(va_arg(args, unsigned long))},
-//     {"d",   handle_int(va_arg(args, int))},
-//     //{"D",   handle_pointer(va_arg(args, unsigned long))},
-//     {"i",   handle_int(va_arg(args, int))},
-//     {"o",   handle_octal(va_arg(args, unsigned int))},
-//     //{"O",   handle_pointer(va_arg(args, unsigned long))},
-//     {"u",   handle_u(va_arg(args, unsigned int))},
-//     //{"U",   handle_pointer(va_arg(args, unsigned long))},
-//     {"x",   handle_hex_lowercase(va_arg(args, unsigned int))},
-//     {"X",   handle_hex_uppercase(va_arg(args, unsigned int))},
-//     //{"c",   handle_pointer(va_arg(args, unsigned long))},
-//     //{"C",   handle_pointer(va_arg(args, unsigned long))},
+//     DispatchTable[] =
+//     {
+//         {'s',   &handle_str},
+//         {'S',   &handle_str},
+//         {'p',   &handle_pointer},
+//         {'d',   &handle_int},
+//         {'D',   &handle_int},
+//         {'i',   &handle_int},
+//         {'o',   &handle_octal},
+//         {'O',   &handle_octal},
+//         {'u',   &handle_u},
+//         {'U',   &handle_u},
+//         {'x',   &handle_x},
+//         {'X',   &handle_x},
+//         {'c',   &handle_char},
+//         {'C',   &handle_char},
+//     }
+//     if (info->specifier == DispatchTable[i])
 // }

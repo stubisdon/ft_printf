@@ -21,7 +21,7 @@ void	ft_wputstr(wchar_t *str)
 		return ;
 	while (str[i] != '\0')
 	{
-		ft_putchar_wide(str[i]);
+		ft_putwchar(str[i]);
 		i++;
 	}
 }

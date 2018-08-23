@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
+#include "../ft_printf/ft_printf.h"
 #include <stdio.h>
 #include <locale.h>
 
@@ -20,9 +20,9 @@ int	main()
 	// int number = -100;
 	// int bumber = 0;
 	// char *str = "koko!";
-	// unsigned int positive = 12312344;
+	unsigned int positive = 12312344;
 
-//	wchar_t *newstring = L"Another text 汉字 привет";
+	wchar_t *newstring = L"Another text 汉字 привет 🤦‍♀️";
 
 /*
 ** parsing tests
@@ -36,9 +36,10 @@ int	main()
 /*
 ** basic tests
 */
-	//    printf("%.2c\n", NULL);
-    //
-	// ft_printf("%.2c\n", NULL);
+
+	ft_printf("%S\n", newstring);
+	printf("\n");
+
 
 	// printed_characters = ft_printf("%c\n", 'C');
 	// ft_printf("%d\n", printed_characters);
@@ -80,3 +81,11 @@ int	main()
 
 	return (0);
 }
+
+// TODOS:
+// basic tests [y]
+// ft_printf.com []
+// moulitest [x]
+// norminette []
+// ** DispatchTable []
+// delete comments []
