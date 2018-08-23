@@ -16,11 +16,12 @@
 
 int	main()
 {
-	// int printed_characters;
-	// int number = -100;
-	// int bumber = 0;
+	int printed_characters;
+	int number = -100;
+	int bumber = 0;
 	// char *str = "koko!";
-	unsigned int positive = 12312344;
+	// int i = 1;
+	// unsigned int positive = 12312344;
 
 	wchar_t *newstring = L"Another text 汉字 привет 🤦‍♀️";
 
@@ -28,14 +29,15 @@ int	main()
 ** parsing tests
 */
 
-	// printed_characters = printf("printf:%.5d %d\n", number, bumber);
-	// printf("characters printed by printf: %d\n", printed_characters);
-	// printed_characters = ft_printf("printz:%.5d %d\n", number, bumber);
-	// printf("characters printed by printz: %d\n", printed_characters);
+	printed_characters = printf("printf:%.5d %d\n", number, bumber);
+	printf("characters printed by printf: %d\n", printed_characters);
+	printed_characters = ft_printf("printz:%.5d %d\n", number, bumber);
+	printf("characters printed by printz: %d\n", printed_characters);
 
 /*
 ** basic tests
 */
+
 
 	ft_printf("%*S\n", newstring);
 	printf("\n");
