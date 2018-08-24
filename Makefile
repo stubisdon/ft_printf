@@ -23,13 +23,14 @@ OBJECTS = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -g -Wall -Wextra -Werror -c $(HEADER) $(LIBFT).h $(LIB_SRC) \
+	gcc -g -Wall -Wextra -Werror -c $(HEADER) $(LIB_SRC) \
 	ft_printf/ft_printf.c \
 	ft_printf/handle_*.c \
 	ft_printf/char_detectors.c \
 	ft_printf/string_parser.c \
 	ft_printf/string_interpreter.c \
-	ft_printf/errors.c
+	ft_printf/errors.c \
+	-I$(LIBFT).h
 	ar rcs $(NAME) $(OBJECTS)
 
 clean:
@@ -38,7 +39,6 @@ clean:
 
 fclean: clean
 	rm -f a.out
-	rm -f $(LIBFT).h.gch
 	rm -f libftprintf.a
 	rm -f ft_printf/ft_printf.h.gch
 	rm -f libft/libft.h.gch
