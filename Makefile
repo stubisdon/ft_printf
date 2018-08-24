@@ -23,14 +23,14 @@ OBJECTS = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -g -Wall -Wextra -Werror -c $(HEADER) $(LIB_SRC) \
+	gcc -g -Wall -Wextra -Werror -c $(LIB_SRC) \
 	ft_printf/ft_printf.c \
 	ft_printf/handle_*.c \
 	ft_printf/char_detectors.c \
 	ft_printf/string_parser.c \
 	ft_printf/string_interpreter.c \
 	ft_printf/errors.c \
-	-I$(LIBFT).h
+	-I$(LIBFT).h $(HEADER)
 	ar rcs $(NAME) $(OBJECTS)
 
 clean:
