@@ -44,14 +44,11 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ)
 	rm -f libft/*.o
 
 fclean: clean
-	rm -f a.out
 	rm -f libftprintf.a
-	rm -f ft_printf/ft_printf.h.gch
-	rm -f libft/libft.h.gch
 	rm -f libft/libft.a
 
 re: fclean
