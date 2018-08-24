@@ -12,26 +12,36 @@
 
 NAME = libftprintf.a
 
-LIBFT = libft/libft
+LIBFT = libft
 
-HEADER = ft_printf/ft_printf.h
+LIB = libft.a
 
-LIB_SRC = libft/*.c
+PRINTF = ft_printf
 
-OBJECTS = *.o
+SRC = ft_printf.c \
+	handle_binary.c \
+	handle_char.c \
+	handle_int.c \
+	handle_octal.c \
+	handle_p.c \
+	handle_percentage.c \
+	handle_string.c \
+	handle_u.c \
+	handle_x.c \
+	char_detectors.c \
+	string_parser.c \
+	string_interpreter.c \
+	errors.c \
+
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c $(LIB_SRC) \
-	ft_printf/ft_printf.c \
-	ft_printf/handle_*.c \
-	ft_printf/char_detectors.c \
-	ft_printf/string_parser.c \
-	ft_printf/string_interpreter.c \
-	ft_printf/errors.c \
-	-I $(LIBFT).h $(HEADER)
-	ar rcs $(NAME) *.o
+	make -C libft
+	gcc -Wall -Wextra -Werror -c ft_printf/*.c -I libft
+	ar rcs $(NAME) $(OBJ) $(LIBFT)/*.o
+	ranlib $(NAME)
 
 clean:
 	rm -f *.o
