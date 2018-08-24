@@ -80,15 +80,16 @@ void parse_specifier(const char *format, i_cont *info)
 		info->specifier = *format;
 }
 
-void parse_string(const char *format, i_cont *info)
+void parse_string(const char *format, i_cont *info, int *printed_characters)
 {
 	int	i;
 
 	i = info->position;
 	while (format[i] != '%' && format[i] != '\0')
 	{
-		info->str_input = ft_strcharjoin(info->str_input, format[i]);
+		ft_putchar(format[i]);
 		i++;
+		(*printed_characters)++;
 	}
 	if (format[i] == '%')
 	{

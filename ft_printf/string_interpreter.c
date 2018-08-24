@@ -40,8 +40,6 @@ void string_print(i_cont *info)
     if (ft_strcmp(info->res, "0") == 0 && ft_strcmp(info->precision, "") == 0\
             && info->flags[f_Dot] == 1)
         info->res = "";
-    if (info->str_input)
-        ft_putstr(info->str_input);
     if (info->res)
         ft_putstr(info->res);
     if (info->wres)

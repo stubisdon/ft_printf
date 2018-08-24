@@ -28,7 +28,7 @@ wchar_t		*ft_wstrdup(wchar_t *wstr)
 	int		i;
 
 	i = 0;
-	if (!(res = (wchar_t*)malloc(sizeof(wchar_t) * (num_wchars(wstr) + 1))))
+	if (!(res = (wchar_t*)malloc(sizeof(wchar_t) * num_wchars(wstr) + 1)))
 		return (NULL);
 	while (wstr[i])
 	{

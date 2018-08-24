@@ -79,7 +79,7 @@ int 	is_specifier(char c);
 int		is_precision(char c);
 
 void 	struct_init(i_cont *info, va_list *args, int *position);
-void	parse_string(const char *format, i_cont *info);
+void	parse_string(const char *format, i_cont *info, int *printed_characters);
 void	string_interpret(i_cont *info);
 void 	string_print(i_cont *info);
 

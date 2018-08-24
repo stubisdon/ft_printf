@@ -26,17 +26,17 @@ int	ft_printf(const char *format, ...)
 	while (format[position] != '\0')
 	{
 		struct_init(info, &args, &position);
-		parse_string(format, info);
+		parse_string(format, info, &printed_characters);
 		error_handle(info);
 		string_interpret(info);
 		string_print(info);
-		printed_characters += ft_strlen(info->str_input);
 		printed_characters += ft_strlen(info->res);
 		if (info->wres != NULL)
 			printed_characters += ft_wstrlen(info->wres);
 		position = info->position;
 	}
 	va_end(args);
+	free(info);
 	return (printed_characters);
 }
 
