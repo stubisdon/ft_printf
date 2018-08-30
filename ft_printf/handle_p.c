@@ -66,7 +66,11 @@ void		handle_pointer(i_cont *info)
 	{
 		if (ft_strcmp(info->res = ft_utoabaselonglong(
 						(unsigned long long int)arg, 16), "") == 0)
+		{
+			free(info->res);
 			error_print(1);
+		}
+
 	}
 	apply_precision(info);
 	if (info->flags[f_Zero] == 1 && info->flags[f_Dash] != 1)

@@ -21,7 +21,7 @@ ROOT = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c $(HEADER) $(SOURCES)
+	gcc -Wall -Wextra -Werror -c $(SOURCES) -I $(HEADER)
 	ar rcs $(NAME) $(ROOT)
 
 clean:

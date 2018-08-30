@@ -113,6 +113,7 @@ void	handle_octal(i_cont *info);
 void	handle_x(i_cont *info);
 void	handle_percentage(i_cont *info);
 void	handle_binary(i_cont *info);
+void	struct_free(i_cont *info);
 void 	error_handle(i_cont *info);
 void	error_print(int error_num);
 

@@ -34,6 +34,7 @@ int	ft_printf(const char *format, ...)
 		if (info->wres != NULL)
 			printed_characters += ft_wstrlen(info->wres);
 		position = info->position;
+		struct_free(info);
 	}
 	va_end(args);
 	free(info);

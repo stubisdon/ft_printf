@@ -46,6 +46,14 @@ void string_print(i_cont *info)
         ft_wputstr(info->wres);
 }
 
+void struct_free(i_cont *info)
+{
+    if (ft_strcmp(info->res, "") != 0)
+        free(info->res);
+    else if (info->wres != NULL)
+        free(info->wres);
+}
+
 // void map_specifier(i_cont *info)
 // {
 //     DispatchTable[] =
