@@ -39,8 +39,7 @@ all: $(NAME)
 
 $(NAME):
 	gcc -Wall -Wextra -Werror -c *.c
-	ar rcs $(NAME) $(OBJ) *.o
-	ranlib $(NAME)
+	ar rc $(NAME) $(OBJ) *.o
 
 clean:
 	rm -f $(OBJ)
