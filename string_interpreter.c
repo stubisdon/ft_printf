@@ -33,8 +33,8 @@ void string_interpret(i_cont *info)
         handle_binary(info);
     else if (info->specifier == '%')
         handle_percentage(info);
-    else
-        error_handle(1);
+    // else
+    //     error_handle(1);
 }
 
 void string_print(i_cont *info)
