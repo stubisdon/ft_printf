@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
 char	*ft_straddsuffix(char *suffix, char *str)
@@ -21,7 +20,7 @@ char	*ft_straddsuffix(char *suffix, char *str)
 
 	i = ft_strlen(suffix) + ft_strlen(str);
 	if (!(res = ft_strnew(i)))
-		error_print(1);
+		print_error();
 	j = -1;
 	i = 0;
 	while (str[++j])

@@ -25,7 +25,7 @@ wchar_t	*ft_wstraddprefix(wchar_t *prefix, wchar_t *str)
 	while (str[j++])
 		i++;
 	if (!(res = ft_wstrnew(i)))
-		error_print(1);
+		print_error();
 	j = -1;
 	while (prefix[++j])
 		res[j] = prefix[j];

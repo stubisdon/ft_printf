@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
 char	*ft_straddprefix(char *prefix, char *str)
@@ -22,7 +21,7 @@ char	*ft_straddprefix(char *prefix, char *str)
 	j = -1;
 	i = ft_strlen(prefix) + ft_strlen(str);
 	if (!(res = ft_strnew(i)))
-		error_print(1);
+		print_error();
 	while (prefix[++j])
 		res[j] = prefix[j];
 	i = 0;
@@ -32,6 +31,6 @@ char	*ft_straddprefix(char *prefix, char *str)
 		i++;
 		j++;
 	}
-//	free(str);
+	free(str);
 	return (res);
 }

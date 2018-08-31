@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
 static char	*check_specialcases(long long n)
@@ -20,13 +19,13 @@ static char	*check_specialcases(long long n)
 	if (n == -9223372036854775807)
 	{
 		if (!(res = ft_strdup("-9223372036854775807")))
-			error_print(1);
+			print_error();
 		return (res);
 	}
 	else if (n == 0)
 	{
 		if (!(res = ft_strdup("0")))
-			error_print(1);
+			print_error();
 		return (res);
 	}
 	return (NULL);
@@ -56,7 +55,7 @@ char		*ft_itoalonglong(long long n)
 	if (n < 0)
 		i++;
 	if (!(res = ft_strnew(i)))
-		error_print(1);
+		print_error();
 	if (n < 0)
 	{
 		res[0] = '-';

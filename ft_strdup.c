@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *s1)
 {
+	char	*res;
 	int		i;
-	char	*dest;
 
 	i = 0;
-	dest = (char*)malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (dest == 0)
-		return (0);
-	while (src[i] != '\0')
+	res = (char *)malloc(sizeof(char) * ft_strlen((char*)s1) + 1);
+	if (res == NULL)
+		return (res);
+	while (s1[i])
 	{
-		dest[i] = src[i];
+		res[i] = s1[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	res[i] = '\0';
+	return (res);
 }

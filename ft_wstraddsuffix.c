@@ -25,7 +25,7 @@ wchar_t	*ft_wstraddsuffix(wchar_t *suffix, wchar_t *str)
 	while (str[j++])
 		i++;
 	if (!(res = ft_wstrnew(i)))
-		error_print(1);
+		print_error();
 	j = -1;
 	while (str[++j])
 		res[j] = str[j];

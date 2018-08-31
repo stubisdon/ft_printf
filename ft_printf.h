@@ -12,113 +12,105 @@
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdarg.h>
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <fcntl.h>
 # include <wchar.h>
-# include "libft.h"
-# define FLAGS 6
-# define L_MODS 6
+# include <stdarg.h>
 
+# define NFLAGS 5
+# define NLENS 6
 
-typedef struct		container
+typedef struct	s_info
 {
-	int				position;
-	int 			flags[FLAGS];
-	int				length_mods[L_MODS];
-	char 			*str_input;
-	char 			*res;
-	char			*width;
-	char			*precision;
-	char			specifier;
-	va_list			*args;
-	wchar_t			*wres;
-	// void			*d_table[128];
+	int		flags[NFLAGS];
+	int		width;
+	int		lens[NLENS];
+	int		preci;
+	char	speci;
+	va_list	*args;
+	char	**str;
+	int		count;
+	char	*res;
+	wchar_t	*wres;
+}				t_info;
 
-	struct container *next;
-}					i_cont;
-
-enum 				flags
+enum			e_flags
 {
-	f_Dash,
-	f_Plus,
-	f_Hash,
-	f_Space,
-	f_Dot,
-	f_Zero
+	Fminus,
+	Fplus,
+	Fspace,
+	Fhash,
+	Fzero
 };
 
-enum 				length_mods
+enum			e_lengths
 {
-	l_hh,
-	l_h,
-	l_ll,
-	l_l,
-	l_j,
-	l_z
+	Lhh,
+	Lh,
+	Ll,
+	Lll,
+	Lj,
+	Lz
 };
-
-enum 				errors
-{
-	e_ConflictingType,
-	e_Missing_value,
-	e_UndefinedBehavior
-};
-
-typedef	void 	(*ptof)(i_cont *);
-
-typedef	struct	DispatchTable
-{
-	char	specifier;
-	ptof	pointer;
-}				DispatchTable;
-
-int		ft_printf(const char *format, ...);
-
-int		is_flag(char c);
-int		is_length(const char *str);
-int 	is_specifier(char c);
-int		is_precision(char c);
-
-void 	struct_init(i_cont *info, va_list *args, int *position);
-void	parse_string(const char *format, i_cont *info, int *printed_characters);
-void	string_interpret(i_cont *info);
-void 	string_print(i_cont *info);
 
 /*
-**	Juan functions
+** LIBFT
 */
+void			ft_putchar(char c);
+void			ft_putstr(char const *s);
+void			ft_putendl(char const *s);
+int				ft_atoi(const char *str);
+char			*ft_strdup(const char *s1);
+size_t			ft_strlen(char *str);
+char			*ft_strnew(size_t size);
+int				ft_toupper(int c);
 
-char	*ft_straddprefix(char *prefix, char *str);
-char		*ft_utoabaselonglong(unsigned long long int n, \
-	unsigned long long int base);
-char		*ft_itoalonglong(long long n);
-char	*ft_straddsuffix(char *suffix, char *str);
-int		ft_wchar_len(wchar_t wc);
-int		ft_wstrlen(wchar_t *wstr);
-wchar_t	*ft_wstraddsuffix(wchar_t *suffix, wchar_t *str);
-wchar_t	*ft_wstraddprefix(wchar_t *prefix, wchar_t *str);
-wchar_t	*ft_wstrnew(size_t size);
-wchar_t		*ft_wstrdup(wchar_t *wstr);
-void	ft_wputstr(wchar_t *str);
-int		ft_wputchar(wchar_t c);
-void	ft_strtoupper(char **str);
-void	ft_strtolower(char **str);
-int		ft_putwchar(wchar_t wc);
-char		*ft_strcharjoin(char const *s1, char const s2);
+/*
+** NEW LIBFT
+*/
+wchar_t			*ft_wstrdup(wchar_t *wstr);
+int				ft_wchar_len(wchar_t wc);
+int				ft_wstrlen(wchar_t *wstr);
+char			*ft_straddprefix(char *prefix, char *str);
+char			*ft_straddsuffix(char *suffix, char *str);
+wchar_t			*ft_wstraddsuffix(wchar_t *suffix, wchar_t *str);
+wchar_t			*ft_wstraddprefix(wchar_t *prefix, wchar_t *str);
+void			print_error(void);
+wchar_t			*ft_wstrnew(size_t	size);
+int				ft_putwchar(wchar_t wc);
+char			*ft_utoabaselonglong(unsigned long long int n,
+		unsigned long long int base);
+void			ft_strtoupper(char **str);
+char			*ft_itoalonglong(long long int n);
 
-void	handle_int(i_cont *info);
-void	handle_str(i_cont *info);
-void	handle_pointer(i_cont *info);
-void	handle_char(i_cont *info);
-void	handle_u(i_cont *info);
-void	handle_octal(i_cont *info);
-void	handle_x(i_cont *info);
-void	handle_percentage(i_cont *info);
-void	handle_binary(i_cont *info);
-void	struct_free(i_cont *info);
-void 	error_handle(i_cont *info);
-void	error_print(int error_num);
-
-
-
+/*
+** FT_PRINTF
+*/
+int				ft_printf(char *format, ...);
+void			initialize_struct(t_info *info, char **str, va_list *args);
+void			check_for_flags(t_info *info);
+void			check_for_width(t_info *info);
+void			check_for_preci(t_info *info);
+void			check_for_lengths(t_info *info);
+void			check_for_speci(t_info *info);
+void			reinit_structure(t_info *info);
+void			reinit_lengths(t_info *info);
+int				is_flag(char c);
+int				is_width(char c);
+int				is_preci(char c);
+int				is_length(char c);
+int				is_speci(char c);
+void			prepare_str(t_info *info);
+void			prepare_percentage(t_info *info);
+void			prepare_address(t_info *info);
+void			prepare_hexadecimal(t_info *info);
+void			prepare_undecimal(t_info *info);
+void			prepare_octal(t_info *info);
+void			prepare_binary(t_info *info);
+void			prepare_signed(t_info *info);
+void			prepare_char(t_info *info);
 
 #endif

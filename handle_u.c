@@ -12,24 +12,24 @@
 
 #include "ft_printf.h"
 
-static void	apply_width(i_cont *info)
+static void	apply_width(t_info *info)
 {
 	int len;
 
-	if (ft_atoi(info->width) > (len = ft_strlen(info->res)))
+	if (info->width > (len = ft_strlen(info->res)))
 	{
-		while (info->flags[f_Dash] == 1 && len < ft_atoi(info->width))
+		while (info->flags[Fminus] == 1 && len < info->width)
 		{
 			info->res = ft_straddsuffix(" ", info->res);
 			len++;
 		}
-		while (info->flags[f_Zero] == 1 && len < ft_atoi(info->width) &&
-				ft_strcmp(info->precision, "") == 0)
+		while (info->flags[Fzero] == 1 && len < info->width &&
+				info->preci < 0)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
 		}
-		while (len < ft_atoi(info->width))
+		while (len < info->width)
 		{
 			info->res = ft_straddprefix(" ", info->res);
 			len++;
@@ -37,13 +37,13 @@ static void	apply_width(i_cont *info)
 	}
 }
 
-static void	apply_precision(i_cont *info)
+static void	apply_precision(t_info *info)
 {
 	int len;
 
-	if (ft_atoi(info->precision) > (len = ft_strlen(info->res)))
+	if (info->preci > (len = ft_strlen(info->res)))
 	{
-		while (ft_atoi(info->precision) > len)
+		while (info->preci > len)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
@@ -51,24 +51,24 @@ static void	apply_precision(i_cont *info)
 	}
 }
 
-void		handle_u(i_cont *info)
+void		prepare_undecimal(t_info *info)
 {
-	if (info->length_mods[l_hh] == 1)
+	if (info->lens[Lhh] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned int), 10);
-	else if (info->length_mods[l_h] == 1)
+	else if (info->lens[Lh] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned int), 10);
-	else if (info->length_mods[l_l] == 1 || info->specifier == 'U')
+	else if (info->lens[Ll] == 1 || info->speci == 'U')
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned long int), 10);
-	else if (info->length_mods[l_ll] == 1)
+	else if (info->lens[Lll] == 1)
 		info->res = ft_utoabaselonglong(va_arg(info->args[0],
 					unsigned long long int), 10);
-	else if (info->length_mods[l_j] == 1)
+	else if (info->lens[Lj] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], uintmax_t), 10);
-	else if (info->length_mods[l_z] == 1)
+	else if (info->lens[Lz] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], size_t), 10);
 	else

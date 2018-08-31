@@ -12,73 +12,97 @@
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+static void	prepare_bytype(t_info *info)
 {
-	va_list		args;
-	i_cont		*info;
-	int 		printed_characters;
-	int			position;
-
-	printed_characters = 0;
-	position = 0;
-	info = (i_cont *)malloc(sizeof(i_cont));
-	va_start(args, format);
-	while (format[position] != '\0')
-	{
-		struct_init(info, &args, &position);
-		parse_string(format, info, &printed_characters);
-		error_handle(info);
-		string_interpret(info);
-		string_print(info);
-		printed_characters += ft_strlen(info->res);
-		if (info->wres != NULL)
-			printed_characters += ft_wstrlen(info->wres);
-		position = info->position;
-		struct_free(info);
-	}
-	va_end(args);
-	free(info);
-	return (printed_characters);
+	if (info->speci == 's' || info->speci == 'S')
+		prepare_str(info);
+	else if (info->speci == 'p' || info->speci == 'P')
+		prepare_address(info);
+	else if (info->speci == 'x' || info->speci == 'X')
+		prepare_hexadecimal(info);
+	else if (info->speci == 'd' || info->speci == 'D' ||
+			info->speci == 'i' || info->speci == 'I')
+		prepare_signed(info);
+	else if (info->speci == 'u' || info->speci == 'U')
+		prepare_undecimal(info);
+	else if (info->speci == 'o' || info->speci == 'O')
+		prepare_octal(info);
+	else if (info->speci == 'c' || info->speci == 'C')
+		prepare_char(info);
+	else if (info->speci == 'b' || info->speci == 'B')
+		prepare_binary(info);
+	else if (info->speci == '%')
+		prepare_percentage(info);
 }
 
+static void	print_res(t_info *info)
+{
+	int i;
 
-// int	ft_printf(const char *format, ...)
-// {
-// 	va_list	args;
-// 	int 	number_of_printed_characters;
-//
-// 	number_of_printed_characters = 0;
-// 	va_start(args, format);
-// 	while(*format)
-// 	{
-// 		if (*format == '%' && *(format + 1) == '%')
-// 		{
-// 			ft_putchar('%');
-// 			format++;
-// 		}
-// 		else if (*format == 'd' || *format == 'i')
-// 			handle_int(va_arg(args, int));
-// 		else if (*format == '\n')
-// 			handle_char('\n');
-// 		else if (*format == ' ')
-// 			handle_char(' ');
-// 		else if (*format == 's')
-// 			handle_string(va_arg(args, char *));
-// 		else if (*format == 'S')
-// 			handle_string_wide(va_arg(args, wchar_t *));
-// 		else if (*format == 'u')
-// 			handle_u(va_arg(args, unsigned int));
-// 		else if (*format == 'o')
-// 			handle_octal(va_arg(args, unsigned int));
-// 		else if (*format == 'x')
-// 			handle_hex_lowercase(va_arg(args, unsigned int));
-// 		else if (*format == 'X')
-// 			handle_hex_uppercase(va_arg(args, unsigned int));
-// 		else if (*format == 'p')
-// 			handle_pointer(va_arg(args, unsigned long));
-// 		format++;
-// 		number_of_printed_characters++;
-// 	}
-// 	va_end(args);
-// 	return (number_of_printed_characters);
-// }
+	i = 0;
+	while (info->res[i])
+	{
+		ft_putchar(info->res[i]);
+		i++;
+	}
+	info->count += i;
+}
+
+static void	print_wres(t_info *info)
+{
+	int i;
+
+	i = 0;
+	while (info->wres[i])
+	{
+		info->count += ft_putwchar(info->wres[i]);
+		i++;
+	}
+}
+
+static void	check_and_print(t_info *info)
+{
+	(info->str[0])++;
+	check_for_flags(info);
+	check_for_width(info);
+	check_for_preci(info);
+	check_for_lengths(info);
+	check_for_speci(info);
+	if (info->speci)
+	{
+		prepare_bytype(info);
+		if (info->res && info->speci)
+			print_res(info);
+		else if (info->wres)
+			print_wres(info);
+	}
+	reinit_structure(info);
+}
+
+int			ft_printf(char *format, ...)
+{
+	t_info	*info;
+	va_list	args;
+	int		count;
+
+	if (!(info = (t_info*)malloc(sizeof(t_info))) || !(format))
+		print_error();
+	va_start(args, format);
+	initialize_struct(info, &format, &args);
+	count = info->count;
+	while (info->str[0][0])
+	{
+		if (info->str[0][0] != '%')
+		{
+			ft_putchar(info->str[0][0]);
+			(info->str[0])++;
+			info->count++;
+		}
+		else
+			check_and_print(info);
+	}
+	count = info->count;
+	free(info);
+	va_end(args);
+	return (count);
+}

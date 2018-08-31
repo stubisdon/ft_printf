@@ -12,25 +12,25 @@
 
 #include "ft_printf.h"
 
-static void apply_width(i_cont *info)
+static void	apply_width(t_info *info)
 {
 	int len;
 
-	if (ft_atoi(info->width) > (len = ft_strlen(info->res)))
+	if (info->width > (len = ft_strlen(info->res)))
 	{
-		while (info->flags[f_Dash] == 1 && len < ft_atoi(info->width))
+		while (info->flags[Fminus] == 1 && len < info->width)
 		{
 			info->res = ft_straddsuffix(" ", info->res);
 			len++;
 		}
-		if (info->flags[f_Zero] == 1 && info->flags[f_Dash] != 1)
+		if (info->flags[Fzero] == 1 && info->flags[Fminus] != 1)
 			len += 2;
-		while (info->flags[f_Dash] == 1 && len < ft_atoi(info->width))
+		while (info->flags[Fzero] == 1 && len < info->width)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
 		}
-		while (len < ft_atoi(info->width))
+		while (len < info->width)
 		{
 			info->res = ft_straddprefix(" ", info->res);
 			len++;
@@ -38,13 +38,13 @@ static void apply_width(i_cont *info)
 	}
 }
 
-static void apply_precision(i_cont *info)
+static void	apply_precision(t_info *info)
 {
 	int len;
 
-	if (ft_atoi(info->precision) > (len = ft_strlen(info->res)))
+	if (info->preci > (len = ft_strlen(info->res)))
 	{
-		while (ft_atoi(info->precision) > len)
+		while (info->preci > len)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
@@ -52,7 +52,7 @@ static void apply_precision(i_cont *info)
 	}
 }
 
-void		handle_pointer(i_cont *info)
+void		prepare_address(t_info *info)
 {
 	void	*arg;
 
@@ -60,42 +60,19 @@ void		handle_pointer(i_cont *info)
 	if (arg == NULL)
 	{
 		if (!(info->res = ft_strdup("0")))
-			error_print(1);
+			print_error();
 	}
 	else
 	{
-		if (ft_strcmp(info->res = ft_utoabaselonglong(
-						(unsigned long long int)arg, 16), "") == 0)
-		{
-			free(info->res);
-			error_print(1);
-		}
-
+		if (!(info->res = ft_utoabaselonglong(
+						(unsigned long long int)arg, 16)))
+			print_error();
 	}
 	apply_precision(info);
-	if (info->flags[f_Zero] == 1 && info->flags[f_Dash] != 1)
+	if (info->flags[Fzero] == 1 && info->flags[Fminus] != 1)
 		apply_width(info);
 	info->res = ft_straddprefix("0x", info->res);
 	apply_width(info);
-	if (info->specifier == 'P')
+	if (info->speci == 'P')
 		ft_strtoupper(&info->res);
 }
-
-
-// void	handle_pointer(unsigned long address)
-// {
-// 	char *str;
-// 	int		i;
-// 	char *appendix;
-//
-// 	str = ft_itoa_base(address, 16);
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		str[i] = ft_tolower(str[i]);
-// 		i++;
-// 	}
-// 	appendix = ft_strdup("0x");
-// 	ft_strcat(appendix, str);
-// 	ft_putstr(appendix);
-// }

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
 static int	count_digits(unsigned long long int n,
@@ -44,14 +43,14 @@ static char	get_char(unsigned long long int n)
 	return (vals[n]);
 }
 
-char	*is_zero(unsigned long long int n)
+static char	*is_zero(unsigned long long int n)
 {
 	char	*res;
 
 	if (n != 0)
 		return (NULL);
 	if (!(res = ft_strdup("0")))
-		error_print(1);
+		print_error();
 	return (res);
 }
 
@@ -65,7 +64,7 @@ char		*ft_utoabaselonglong(unsigned long long int n,
 		return (res);
 	i = count_digits(n, base);
 	if (!(res = ft_strnew(i)))
-		error_print(1);
+		print_error();
 	i--;
 	while (n != 0)
 	{

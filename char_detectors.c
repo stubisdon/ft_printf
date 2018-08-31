@@ -12,56 +12,102 @@
 
 #include "ft_printf.h"
 
-int	is_flag(char c)
+void	check_for_flags(t_info *info)
 {
-	// if (c == '#' || c == '+' || c == '-' || c == ' ' ||  c == '0'\
-	// || c == '.' || c == '*')
-	// 	return (1);
-	// return (0);
-
-	if (c == '-')
-		return (f_Dash);
-	if (c == '+')
-		return (f_Plus);
-	if (c == '#')
-		return (f_Hash);
-	if (c == ' ')
-		return (f_Space);
-	if (c == '0')
-		return (f_Zero);
-	return (-1);
+	while (is_flag(info->str[0][0]))
+	{
+		if (info->str[0][0] == '-')
+			info->flags[Fminus] = 1;
+		else if (info->str[0][0] == '+')
+			info->flags[Fplus] = 1;
+		else if (info->str[0][0] == ' ')
+			info->flags[Fspace] = 1;
+		else if (info->str[0][0] == '#')
+			info->flags[Fhash] = 1;
+		else if (info->str[0][0] == '0')
+			info->flags[Fzero] = 1;
+		(info->str[0])++;
+	}
 }
 
-int	is_length(const char *str)
+void	check_for_width(t_info *info)
 {
-	if (*str == 'h' && *(str + 1) == 'h')
-		return (l_hh);
-	if (*str == 'h' && *(str + 1) != 'h' && *(str - 1) != 'h')
-		return (l_h);
-	if (*str == 'l' && *(str + 1) == 'l')
-		return (l_ll);
-	if (*str == 'l' && *(str + 1) != 'l' && *(str - 1) != 'l')
-		return (l_l);
-	if (*str == 'j')
-		return (l_j);
-	if (*str == 'z')
-		return (l_z);
-	return (-1);
+	while (is_width(info->str[0][0]))
+	{
+		if (info->str[0][0] >= '0' && info->str[0][0] <= '9')
+		{
+			info->width = ft_atoi(info->str[0]);
+			while (info->str[0][0] >= '0' && info->str[0][0] <= '9')
+				(info->str[0])++;
+		}
+		else if (info->str[0][0] == '*')
+		{
+			info->width = va_arg(info->args[0], int);
+			(info->str[0])++;
+		}
+	}
 }
 
-int is_specifier(char c)
+void	check_for_preci(t_info *info)
 {
-	if (c == 'd' || c == 'i' || c == 's' || c == 'S' || c == 'u' || c == 'U' || c == 'p' || c == 'D' || c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-	c == 'b' || c == 'B' || c == 'f')
-		return (1);
-	if (c == 'c' || c == 'C' || c == '%')
-		return (1);
-	return (0);
+	while (is_preci(info->str[0][0]))
+	{
+		(info->str[0])++;
+		if (info->str[0][0] >= '0' && info->str[0][0] <= '9')
+		{
+			info->preci = ft_atoi(info->str[0]);
+			while (info->str[0][0] >= '0' && info->str[0][0] <= '9')
+				(info->str[0])++;
+		}
+		else if (info->str[0][0] == '*')
+		{
+			info->preci = va_arg(info->args[0], int);
+			(info->str[0])++;
+		}
+		else if (info->str[0][0] != '-')
+			info->preci = 0;
+		else
+		{
+			(info->str[0])++;
+			while (info->str[0][0] >= '0' && info->str[0][0] <= '9')
+				(info->str[0])++;
+		}
+	}
 }
 
-int	is_precision(char c)
+void	check_for_lengths(t_info *info)
 {
-	if (c == '.')
-		return (1);
-	return (0);
+	while (is_length(info->str[0][0]))
+	{
+		if (info->str[0][0] == 'h' && info->str[0][1] == 'h')
+		{
+			info->lens[Lhh] = 1;
+			(info->str[0])++;
+		}
+		else if (info->str[0][0] == 'h')
+			info->lens[Lh] = 1;
+		else if (info->str[0][0] == 'l' && info->str[0][1] == 'l')
+		{
+			info->lens[Lll] = 1;
+			(info->str[0])++;
+		}
+		else if (info->str[0][0] == 'l')
+			info->lens[Ll] = 1;
+		else if (info->str[0][0] == 'j')
+			info->lens[Lj] = 1;
+		else if (info->str[0][0] == 'z')
+			info->lens[Lz] = 1;
+		(info->str[0])++;
+		if (is_length(info->str[0][0]))
+			reinit_lengths(info);
+	}
+}
+
+void	check_for_speci(t_info *info)
+{
+	if (is_speci(info->str[0][0]))
+	{
+		info->speci = info->str[0][0];
+		(info->str[0])++;
+	}
 }

@@ -12,41 +12,41 @@
 
 #include "ft_printf.h"
 
-static void	apply_hash(i_cont *info, int flag, int iszero)
+static void	apply_hash(t_info *info, int flag, int iszero)
 {
-	if (info->flags[f_Hash] == 1 && iszero != 1)
+	if (info->flags[Fhash] == 1 && iszero != 1)
 	{
-		if (info->flags[f_Zero] == 1 && info->flags[f_Dash] != 1 &&
-				flag == 1 && ft_strcmp(info->precision, "") == 0)
+		if (info->flags[Fzero] == 1 && info->flags[Fminus] != 1 &&
+				flag == 1 && info->preci < 0)
 			info->res = ft_straddprefix("0x", info->res);
-		else if (((info->flags[f_Zero] != 1 || info->flags[f_Dash] == 1) &&
-				flag == 0) || (info->flags[f_Zero] == 1 &&
-					ft_atoi(info->precision) > 0 && flag == 0))
+		else if (((info->flags[Fzero] != 1 || info->flags[Fminus] == 1) &&
+				flag == 0) || (info->flags[Fzero] == 1 && info->preci > 0
+					&& flag == 0))
 			info->res = ft_straddprefix("0x", info->res);
 	}
 }
 
-static void	apply_width(i_cont *info, int iszero)
+static void	apply_width(t_info *info, int iszero)
 {
 	int len;
 
-	if (ft_atoi(info->width) > (len = ft_strlen(info->res)))
+	if (info->width > (len = ft_strlen(info->res)))
 	{
-		while (info->flags[f_Dash] == 1 && len < ft_atoi(info->width))
+		while (info->flags[Fminus] == 1 && len < info->width)
 		{
 			info->res = ft_straddsuffix(" ", info->res);
 			len++;
 		}
-		if (info->flags[f_Zero] == 1 && info->flags[f_Dash] != 1 &&
-				info->flags[f_Hash] == 1 && ft_strcmp(info->precision, "") == 0)
+		if (info->flags[Fzero] == 1 && info->flags[Fminus] != 1 &&
+				info->flags[Fhash] == 1 && info->preci < 0)
 			len += 2;
-		while (info->flags[f_Zero] == 1 && len < ft_atoi(info->width) &&
-				ft_strcmp(info->precision, "") == 0)
+		while (info->flags[Fzero] == 1 && len < info->width &&
+				info->preci < 0)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
 		}
-		while (len < ft_atoi(info->width))
+		while (len < info->width)
 		{
 			info->res = ft_straddprefix(" ", info->res);
 			len++;
@@ -55,7 +55,7 @@ static void	apply_width(i_cont *info, int iszero)
 	apply_hash(info, 1, iszero);
 }
 
-static void	apply_precision(i_cont *info)
+static void	apply_precision(t_info *info)
 {
 	int len;
 	int	iszero;
@@ -63,15 +63,15 @@ static void	apply_precision(i_cont *info)
 	iszero = 0;
 	if (info->res[0] == '0' && !(info->res[1]))
 		iszero = 1;
-	if (ft_atoi(info->precision) > (len = ft_strlen(info->res)))
+	if (info->preci > (len = ft_strlen(info->res)))
 	{
-		while (ft_atoi(info->precision) > len)
+		while (info->preci > len)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
 		}
 	}
-	if (info->flags[f_Dot] == 1 && iszero == 1)
+	if (info->preci == 0 && iszero == 1)
 	{
 		free(info->res);
 		info->res = ft_strdup("");
@@ -80,30 +80,30 @@ static void	apply_precision(i_cont *info)
 	apply_width(info, iszero);
 }
 
-void		handle_x(i_cont *info)
+void		prepare_hexadecimal(t_info *info)
 {
-	if (info->length_mods[l_hh] == 1)
+	if (info->lens[Lhh] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned int), 16);
-	else if (info->length_mods[l_h] == 1)
+	else if (info->lens[Lh] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned int), 16);
-	else if (info->length_mods[l_l] == 1)
+	else if (info->lens[Ll] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned long int), 16);
-	else if (info->length_mods[l_ll] == 1)
+	else if (info->lens[Lll] == 1)
 		info->res = ft_utoabaselonglong(va_arg(
 					info->args[0], unsigned long long int), 16);
-	else if (info->length_mods[l_j] == 1)
+	else if (info->lens[Lj] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], uintmax_t), 16);
-	else if (info->length_mods[l_z] == 1)
+	else if (info->lens[Lz] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], size_t), 16);
 	else
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
 					info->args[0], unsigned int), 16);
 	apply_precision(info);
-	if (info->specifier == 'X')
+	if (info->speci == 'X')
 		ft_strtoupper(&info->res);
 }

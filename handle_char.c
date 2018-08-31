@@ -12,23 +12,23 @@
 
 #include "ft_printf.h"
 
-static void	apply_widthwchar(i_cont *info)
+static void	apply_widthwchar(t_info *info)
 {
 	int len;
 
-	if (ft_atoi(info->width) > (len = ft_wstrlen(info->wres)))
+	if (info->width > (len = ft_wstrlen(info->wres)))
 	{
-		while (info->flags[f_Dash] == 1 && ft_atoi(info->width) > len)
+		while (info->flags[Fminus] == 1 && info->width > len)
 		{
 			info->wres = ft_wstraddsuffix(L" ", info->wres);
 			len++;
 		}
-		while (info->flags[f_Zero] == 1 && ft_atoi(info->width) > len)
+		while (info->flags[Fzero] == 1 && info->width > len)
 		{
 			info->wres = ft_wstraddprefix(L"0", info->wres);
 			len++;
 		}
-		while (ft_atoi(info->width) > len)
+		while (info->width > len)
 		{
 			info->wres = ft_wstraddprefix(L" ", info->wres);
 			len++;
@@ -36,25 +36,25 @@ static void	apply_widthwchar(i_cont *info)
 	}
 }
 
-static void	apply_width(i_cont *info)
+static void	apply_width(t_info *info)
 {
 	int len;
 
-	if (info->specifier == 'c' && info->length_mods[l_l] != 1)
+	if (info->speci == 'c' && info->lens[Ll] != 1)
 	{
-		if (ft_atoi(info->width) > (len = ft_strlen(info->res)))
+		if (info->width > (len = ft_strlen(info->res)))
 		{
-			while (info->flags[f_Dash] == 1 && ft_atoi(info->width) > len)
+			while (info->flags[Fminus] == 1 && info->width > len)
 			{
 				info->res = ft_straddsuffix(" ", info->res);
 				len++;
 			}
-			while (info->flags[f_Zero] == 1 && ft_atoi(info->width) > len)
+			while (info->flags[Fzero] == 1 && info->width > len)
 			{
 				info->res = ft_straddprefix("0", info->res);
 				len++;
 			}
-			while (ft_atoi(info->width) > len)
+			while (info->width > len)
 			{
 				info->res = ft_straddprefix(" ", info->res);
 				len++;
@@ -65,7 +65,7 @@ static void	apply_width(i_cont *info)
 		apply_widthwchar(info);
 }
 
-static void	print_specialcase(i_cont *info)
+static void	print_specialcase(t_info *info)
 {
 	int	i;
 
@@ -75,22 +75,22 @@ static void	print_specialcase(i_cont *info)
 		ft_putchar(info->res[i]);
 		i++;
 	}
-	info->position += i;
+	info->count += i;
 	ft_putchar('\0');
-	// info->position++;
-	info->specifier = '\0';
+	info->count++;
+	info->speci = '\0';
 }
 
-void		handle_char(i_cont *info)
+void		prepare_char(t_info *info)
 {
 	char	res;
 	int		flag;
 
 	flag = 0;
-	if (info->specifier == 'c' && info->length_mods[l_l] != 1)
+	if (info->speci == 'c' && info->lens[Ll] != 1)
 	{
 		if (!(info->res = ft_strnew(1)))
-			error_print(1);
+			print_error();
 		res = va_arg(info->args[0], int);
 		if (res == 0)
 			flag = 1;
@@ -99,7 +99,7 @@ void		handle_char(i_cont *info)
 	else
 	{
 		if (!(info->wres = ft_wstrnew(1)))
-			error_print(1);
+			print_error();
 		info->wres[0] = va_arg(info->args[0], wchar_t);
 	}
 	if (flag == 1)
