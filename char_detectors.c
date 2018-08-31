@@ -52,7 +52,7 @@ int	is_length(const char *str)
 int is_specifier(char c)
 {
 	if (c == 'd' || c == 'i' || c == 's' || c == 'S' || c == 'u' || c == 'U' || c == 'p' || c == 'D' || c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-	c == 'b' || c == 'B')
+	c == 'b' || c == 'B' || c == 'f')
 		return (1);
 	if (c == 'c' || c == 'C' || c == '%')
 		return (1);
