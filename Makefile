@@ -38,7 +38,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c *.c *.h
+	gcc -Wall -Wextra -Werror -c *.c
 	ar rcs $(NAME) $(OBJ) *.o
 	ranlib $(NAME)
 
