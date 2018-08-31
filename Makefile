@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/21 13:18:14 by dkotov           ###   ########.fr        #
+#    Updated: 2018/08/29 18:27:54 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,18 +38,17 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	make -C libft
-	gcc -Wall -Wextra -Werror -c ft_printf/*.c -I libft
-	ar rcs $(NAME) $(OBJ) $(LIBFT)/*.o
+	gcc -Wall -Wextra -Werror -c *.c *.h
+	ar rcs $(NAME) $(OBJ) *.o
 	ranlib $(NAME)
 
 clean:
 	rm -f $(OBJ)
-	rm -f libft/*.o
+	rm -f *.o
 
 fclean: clean
 	rm -f libftprintf.a
-	rm -f libft/libft.a
+	rm -f libft.a
 
 re: fclean
 	make all

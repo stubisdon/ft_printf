@@ -103,6 +103,7 @@ int		ft_wputchar(wchar_t c);
 void	ft_strtoupper(char **str);
 void	ft_strtolower(char **str);
 int		ft_putwchar(wchar_t wc);
+char		*ft_strcharjoin(char const *s1, char const s2);
 
 void	handle_int(i_cont *info);
 void	handle_str(i_cont *info);
