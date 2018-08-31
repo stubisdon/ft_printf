@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
 wchar_t	*ft_wstraddsuffix(wchar_t *suffix, wchar_t *str)
 {

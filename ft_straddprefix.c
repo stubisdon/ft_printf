@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
 char	*ft_straddprefix(char *prefix, char *str)
 {

@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 # include <wchar.h>
-# include "../libft/libft.h"
+# include "libft.h"
 # define FLAGS 6
 # define L_MODS 6
 
