@@ -5,54 +5,32 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/08/21 13:18:14 by dkotov           ###   ########.fr        #
+#    Created: 2018/06/19 20:27:56 by dkotov            #+#    #+#              #
+#    Updated: 2018/06/19 21:28:09 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft.a
 
-LIBFT = libft
+HEADER = libft.h
 
-LIB = libft.a
+SOURCES = *.c
 
-PRINTF = ft_printf
-
-SRC = ft_printf.c \
-	handle_binary.c \
-	handle_char.c \
-	handle_int.c \
-	handle_octal.c \
-	handle_p.c \
-	handle_percentage.c \
-	handle_string.c \
-	handle_u.c \
-	handle_x.c \
-	char_detectors.c \
-	string_parser.c \
-	string_interpreter.c \
-	errors.c \
-
-OBJ = $(SRC:.c=.o)
+ROOT = *.o
 
 all: $(NAME)
 
 $(NAME):
-	make -C libft
-	gcc -Wall -Wextra -Werror -c ft_printf/*.c -I libft
-	ar rcs $(NAME) $(OBJ) $(LIBFT)/*.o
-	ranlib $(NAME)
+	gcc -Wall -Wextra -Werror -c $(HEADER) $(SOURCES)
+	ar rcs $(NAME) $(ROOT)
 
 clean:
-	rm -f $(OBJ)
-	rm -f libft/*.o
+	rm -f *.o
 
 fclean: clean
-	rm -f libftprintf.a
-	rm -f libft/libft.a
+	rm -f $(NAME) $(HEADER).gch a.out
 
-re: fclean
-	make all
+re:	fclean all
 
-leaks:
-	gcc -g ft_printf/*.c libft/*.c tests/main.c 
+main:
+	gcc -Wall -Wextra -Werror main.c $(NAME)
