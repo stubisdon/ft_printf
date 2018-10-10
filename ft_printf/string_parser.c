@@ -25,7 +25,7 @@ void struct_init(i_cont *info, va_list *args, int *position)
 		info->length_mods[i] = -1;
 	info->str_input = "";
 	info->res = "";
-	if (info->wres != NULL)
+	if (info->wres != NULL && *position != 0)
 		free(info->wres);
 	info->wres = NULL;
 	info->width = ft_strdup("");

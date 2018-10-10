@@ -16,29 +16,29 @@
 
 int	main()
 {
-	int printed_characters;
-	int number = -100;
-	int bumber = 0;
+	// int printed_characters;
+	// int number = -100;
+	// int bumber = 0;
 	char *str = "koko!";
-	unsigned int positive = 12312344;
-
-	wchar_t *newstring = L"Another text 汉字 привет 🤦‍♀️";
+	// unsigned int positive = 12312344;
+    //
+	// wchar_t *newstring = L"Another text 汉字 привет 🤦‍♀️";
 
 /*
 ** parsing tests
 */
 
-	printed_characters = printf("printf:%.5d %d\n", number, bumber);
-	printf("characters printed by printf: %d\n", printed_characters);
-	printed_characters = ft_printf("printz:%.5d %d\n", number, bumber);
-	printf("characters printed by printz: %d\n", printed_characters);
+	// printed_characters = printf("printf:%.5d %d\n", number, bumber);
+	// printf("characters printed by printf: %d\n", printed_characters);
+	// printed_characters = ft_printf("printz:%.5d %d\n", number, bumber);
+	// printf("characters printed by printz: %d\n", printed_characters);
 
 /*
 ** basic tests
 */
 
-	ft_printf("hello\n");
-	printf("\n");
+	// ft_printf("hello\n");
+	// printf("\n");
 
 	// ft_printf("\\n");
 	// ft_printf("%%\\n");
@@ -50,11 +50,11 @@ int	main()
 	// ft_printf("%x\\n", 505);
 	// ft_printf("%X\\n", 505);
 	// ft_printf("%p\\n", &ft_printf);
-	ft_printf("%20.15d\\n", 54321);
-	ft_printf("%-10d\\n", 3);
-	ft_printf("% d\\n", 3);
-	ft_printf("%+d\\n", 3);
-	ft_printf("%010d\\n", 1);
+	// ft_printf("%20.15d\\n", 54321);
+	// ft_printf("%-10d\\n", 3);
+	// ft_printf("% d\\n", 3);
+	// ft_printf("%+d\\n", 3);
+	// ft_printf("%010d\\n", 1);
 	// ft_printf("%hhd\\n", 0);
 	// ft_printf("%jd\\n", 9223372036854775807);
 	// ft_printf("%zd\\n", 4294967295);
@@ -106,8 +106,19 @@ int	main()
 /*
 **	structure test
 */
-	ft_printf("Test flags: %ls\n", newstring);
-	printf("Test flags: %ls\n", newstring);
+	// ft_printf("Test flags: %ls\n", newstring);
+	// printf("Test flags: %ls\n", newstring);
+
+/*
+**	basic tests from moulitest
+*/
+	ft_printf("%.2c", NULL);
+	// ft_printf("%s %s", NULL, str);
+	// ft_printf("@moulitest: %c", 0);
+	// ft_printf("%2c", 0);
+	// ft_printf("null %c and text", 0);
+	// ft_printf("% c", 0);
+	// ft_printf("%hd", 32768);
 
 	while(1);
 
