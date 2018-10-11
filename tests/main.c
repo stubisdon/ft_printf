@@ -112,10 +112,10 @@ int	main()
 /*
 **	basic tests from moulitest
 */
-	ft_printf("%.2c", NULL);
+	// ft_printf("%.2c", NULL);
 	// ft_printf("%s %s", NULL, str);
 	// ft_printf("@moulitest: %c", 0);
-	// ft_printf("%2c", 0);
+	ft_printf("%2c", 0);
 	// ft_printf("null %c and text", 0);
 	// ft_printf("% c", 0);
 	// ft_printf("%hd", 32768);

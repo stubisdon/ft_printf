@@ -75,7 +75,7 @@ static void	print_specialcase(i_cont *info)
 		ft_putchar(info->res[i]);
 		i++;
 	}
-	info->position += i;
+		// info->position += i;
 	ft_putchar('\0');
 	// info->position++;
 	info->specifier = '\0';
@@ -102,9 +102,9 @@ void		handle_char(i_cont *info)
 			error_print(1);
 		info->wres[0] = va_arg(info->args[0], wchar_t);
 	}
-	if (flag == 1)
-		info->width--;
-	if (info->width > 0)
+	// if (flag == 1)
+	// 	info->width--;
+	if (ft_atoi(info->width) > 0)
 		apply_width(info);
 	if (flag == 1)
 		print_specialcase(info);
