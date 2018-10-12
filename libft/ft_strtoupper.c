@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
+#include "libft.h"
 
 void	ft_strtoupper(char **str)
 {

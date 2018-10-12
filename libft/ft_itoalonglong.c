@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../ft_printf/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 static char	*check_specialcases(long long n)
 {

@@ -102,4 +102,18 @@ char			*ft_strcharcat(char *s1, const char s2);
 ** new (not tested) functions end
 */
 
+char			*ft_itoalonglong(long long n);
+int				ft_putwchar(wchar_t wc);
+char			*ft_straddprefix(char *prefix, char *str);
+char			*ft_straddsuffix(char *suffix, char *str);
+void			ft_strtolower(char **str);
+void			ft_strtoupper(char **str);
+char			*ft_utoabaselonglong(unsigned long long int n, \
+				unsigned long long int base);
+int				ft_wchar_len(wchar_t wc);
+int				ft_wputchar(wchar_t c);
+void			ft_wputstr(wchar_t *str);
+wchar_t			*ft_wstraddprefix(wchar_t *prefix, wchar_t *str);
+wchar_t			*ft_wstraddsuffix(wchar_t *suffix, wchar_t *str);
+
 #endif

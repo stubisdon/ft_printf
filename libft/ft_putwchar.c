@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
+#include "libft.h"
 
 static int	wchar_utf8(wchar_t wc, char *convertion)
 {

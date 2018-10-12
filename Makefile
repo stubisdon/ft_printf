@@ -39,7 +39,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-	gcc -Wall -Wextra -Werror -c ft_printf/*.c -I libft
+	gcc -Wall -Wextra -Werror -c srcs/*.c -I libft
 	ar rcs $(NAME) $(OBJ) $(LIBFT)/*.o
 	ranlib $(NAME)
 
@@ -53,6 +53,3 @@ fclean: clean
 
 re: fclean
 	make all
-
-test:
-	gcc -g ft_printf/*.c libft/*.c tests/main.c -fsanitize=address
