@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void apply_width(i_cont *info)
+static void	apply_width(t_cont *info)
 {
 	int len;
 
@@ -38,7 +38,7 @@ static void apply_width(i_cont *info)
 	}
 }
 
-static void apply_precision(i_cont *info)
+static void	apply_precision(t_cont *info)
 {
 	int len;
 
@@ -52,7 +52,7 @@ static void apply_precision(i_cont *info)
 	}
 }
 
-void		handle_pointer(i_cont *info)
+void		handle_pointer(t_cont *info)
 {
 	void	*arg;
 
@@ -76,22 +76,3 @@ void		handle_pointer(i_cont *info)
 	if (info->specifier == 'P')
 		ft_strtoupper(&info->res);
 }
-
-
-// void	handle_pointer(unsigned long address)
-// {
-// 	char *str;
-// 	int		i;
-// 	char *appendix;
-//
-// 	str = ft_itoa_base(address, 16);
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		str[i] = ft_tolower(str[i]);
-// 		i++;
-// 	}
-// 	appendix = ft_strdup("0x");
-// 	ft_strcat(appendix, str);
-// 	ft_putstr(appendix);
-// }

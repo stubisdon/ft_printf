@@ -12,15 +12,13 @@
 
 #include "ft_printf.h"
 
-static void	apply_precision(i_cont *info)
+static void	apply_precision(t_cont *info)
 {
 	int len;
 	int i;
 
 	len = 0;
 	i = 0;
-	// if (info->flags[f_Dot] == 1)
-	// 	info->precision = "0";
 	if (info->specifier == 's' && info->length_mods[l_l] != 1)
 	{
 		if (ft_strlen(info->precision) > 0)
@@ -36,12 +34,11 @@ static void	apply_precision(i_cont *info)
 				len += ft_wchar_len(info->wres[i]);
 				i++;
 			}
-		//	info->wres[--i] = 0;
 		}
 	}
 }
 
-static void	apply_widthwchar(i_cont *info)
+static void	apply_widthwchar(t_cont *info)
 {
 	int len;
 
@@ -65,7 +62,7 @@ static void	apply_widthwchar(i_cont *info)
 	}
 }
 
-static void	apply_width(i_cont *info)
+static void	apply_width(t_cont *info)
 {
 	int len;
 
@@ -94,7 +91,7 @@ static void	apply_width(i_cont *info)
 		apply_widthwchar(info);
 }
 
-void		handle_str(i_cont *info)
+void		handle_str(t_cont *info)
 {
 	wchar_t *warg;
 	char	*sarg;
@@ -105,8 +102,6 @@ void		handle_str(i_cont *info)
 			info->res = ft_strdup(sarg);
 		else
 			info->res = ft_strdup("(null)");
-		// if (ft_strcmp(info->res, "") == 0)
-		// 	error_print(1);
 	}
 	else
 	{

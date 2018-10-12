@@ -44,7 +44,7 @@ static char	get_char(unsigned long long int n)
 	return (vals[n]);
 }
 
-char	*is_zero(unsigned long long int n)
+char		*is_zero(unsigned long long int n)
 {
 	char	*res;
 

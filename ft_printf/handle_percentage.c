@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	handle_percentage(i_cont *info)
+void	handle_percentage(t_cont *info)
 {
 	int len;
 

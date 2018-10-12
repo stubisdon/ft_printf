@@ -6,13 +6,13 @@
 /*   By: dkotov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 13:38:05 by dkotov            #+#    #+#             */
-/*   Updated: 2018/07/26 13:40:53 by dkotov           ###   ########.fr       */
+/*   Updated: 2018/10/11 18:54:36 by dkotov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	negative_num(i_cont *info)
+int		negative_num(t_cont *info)
 {
 	char	*tmp;
 
@@ -26,7 +26,7 @@ int	negative_num(i_cont *info)
 	return (1);
 }
 
-void	apply_precision(i_cont *info)
+void	apply_precision(t_cont *info)
 {
 	int len;
 
@@ -41,7 +41,7 @@ void	apply_precision(i_cont *info)
 	}
 }
 
-void	apply_width(i_cont *info, int isneg)
+void	apply_width(t_cont *info, int isneg)
 {
 	int len;
 
@@ -56,7 +56,8 @@ void	apply_width(i_cont *info, int isneg)
 				(info->flags[f_Plus] == 1 || info->flags[f_Space] == 1 ||
 				isneg == 1) && ft_strcmp(info->precision, "") == 0)
 			len += 1;
-		while (info->flags[f_Zero] == 1 && len < ft_atoi(info->width) && ft_strcmp(info->precision, "") == 0)
+		while (info->flags[f_Zero] == 1 && len < ft_atoi(info->width) && \
+		ft_strcmp(info->precision, "") == 0)
 		{
 			info->res = ft_straddprefix("0", info->res);
 			len++;
@@ -69,7 +70,7 @@ void	apply_width(i_cont *info, int isneg)
 	}
 }
 
-void	apply_flags(i_cont *info, int isneg)
+void	apply_flags(t_cont *info, int isneg)
 {
 	if (isneg == 0)
 	{
@@ -82,7 +83,7 @@ void	apply_flags(i_cont *info, int isneg)
 		info->res = ft_straddprefix("-", info->res);
 }
 
-void	handle_int(i_cont *info)
+void	handle_int(t_cont *info)
 {
 	int		isneg;
 

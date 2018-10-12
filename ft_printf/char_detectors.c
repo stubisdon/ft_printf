@@ -6,7 +6,7 @@
 /*   By: dkotov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 16:06:53 by dkotov            #+#    #+#             */
-/*   Updated: 2018/08/03 16:06:57 by dkotov           ###   ########.fr       */
+/*   Updated: 2018/10/11 18:52:45 by dkotov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 int	is_flag(char c)
 {
-	// if (c == '#' || c == '+' || c == '-' || c == ' ' ||  c == '0'\
-	// || c == '.' || c == '*')
-	// 	return (1);
-	// return (0);
-
 	if (c == '-')
 		return (f_Dash);
 	if (c == '+')
@@ -49,10 +44,11 @@ int	is_length(const char *str)
 	return (-1);
 }
 
-int is_specifier(char c)
+int	is_specifier(char c)
 {
-	if (c == 'd' || c == 'i' || c == 's' || c == 'S' || c == 'u' || c == 'U' || c == 'p' || c == 'D' || c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-	c == 'b' || c == 'B')
+	if (c == 'd' || c == 'i' || c == 's' || c == 'S' || c == 'u' || \
+	c == 'U' || c == 'p' || c == 'D' || c == 'o' || c == 'O' || c == 'x' || \
+	c == 'X' || c == 'b' || c == 'B')
 		return (1);
 	if (c == 'c' || c == 'C' || c == '%')
 		return (1);

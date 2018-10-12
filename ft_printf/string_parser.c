@@ -12,30 +12,7 @@
 
 #include "ft_printf.h"
 
-void struct_init(i_cont *info, va_list *args, int *position)
-{
-	int	i;
-
-	info->position = *position;
-	i = -1;
-	while (++i <= FLAGS)
-		info->flags[i] = -1;
-	i = -1;
-	while (++i <= L_MODS)
-		info->length_mods[i] = -1;
-	info->str_input = "";
-	info->res = "";
-	if (info->wres != NULL && *position != 0)
-		free(info->wres);
-	info->wres = NULL;
-	info->width = ft_strdup("");
-	info->precision = ft_strdup("");
-	info->specifier = 0;
-	info->args = args;
-	info->next = 0;
-}
-
-void parse_flag(const char *format, i_cont *info)
+void	parse_flag(const char *format, t_cont *info)
 {
 	int flagnum;
 
@@ -46,7 +23,7 @@ void parse_flag(const char *format, i_cont *info)
 		info->flags[f_Zero] = 1;
 }
 
-void parse_width(const char *format, i_cont *info)
+void	parse_width(const char *format, t_cont *info)
 {
 	if (ft_isdigit(*format) == 1 && info->flags[f_Dot] != 1)
 	{
@@ -59,8 +36,13 @@ void parse_width(const char *format, i_cont *info)
 		info->flags[f_Aster] = 1;
 }
 
-void parse_precision(const char *format, i_cont *info)
+void	parse_length_and_preci(const char *format, t_cont *info)
 {
+	int	len_num;
+
+	len_num = is_length(format);
+	if (len_num >= l_hh && len_num <= l_z)
+		info->length_mods[len_num] = 1;
 	if (is_precision(*format) == 1)
 	{
 		info->flags[f_Dot] = 1;
@@ -69,22 +51,13 @@ void parse_precision(const char *format, i_cont *info)
 	}
 }
 
-void parse_length(const char *format, i_cont *info)
-{
-	int	len_num;
-
-	len_num = is_length(format);
-	if (len_num >= l_hh && len_num <= l_z)
-		info->length_mods[len_num] = 1;
-}
-
-void parse_specifier(const char *format, i_cont *info)
+void	parse_specifier(const char *format, t_cont *info)
 {
 	if (is_specifier(*format) == 1)
 		info->specifier = *format;
 }
 
-void parse_string(const char *format, i_cont *info, int *printed_characters)
+void	parse_string(const char *format, t_cont *info, int *printed_characters)
 {
 	int	i;
 
@@ -102,8 +75,7 @@ void parse_string(const char *format, i_cont *info, int *printed_characters)
 		{
 			parse_flag(&format[i], info);
 			parse_width(&format[i], info);
-			parse_precision(&format[i], info);
-			parse_length(&format[i], info);
+			parse_length_and_preci(&format[i], info);
 			i++;
 		}
 		parse_specifier(&format[i], info);

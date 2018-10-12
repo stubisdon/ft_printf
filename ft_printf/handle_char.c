@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	apply_widthwchar(i_cont *info)
+static void	apply_widthwchar(t_cont *info)
 {
 	int len;
 
@@ -36,7 +36,7 @@ static void	apply_widthwchar(i_cont *info)
 	}
 }
 
-static void	apply_width(i_cont *info)
+static void	apply_width(t_cont *info)
 {
 	int len;
 
@@ -65,7 +65,7 @@ static void	apply_width(i_cont *info)
 		apply_widthwchar(info);
 }
 
-static void	print_specialcase(i_cont *info)
+static void	print_specialcase(t_cont *info)
 {
 	int	i;
 
@@ -75,13 +75,11 @@ static void	print_specialcase(i_cont *info)
 		ft_putchar(info->res[i]);
 		i++;
 	}
-		// info->position += i;
 	ft_putchar('\0');
-	// info->position++;
 	info->specifier = '\0';
 }
 
-void		handle_char(i_cont *info)
+void		handle_char(t_cont *info)
 {
 	char	res;
 	int		flag;
@@ -102,8 +100,6 @@ void		handle_char(i_cont *info)
 			error_print(1);
 		info->wres[0] = va_arg(info->args[0], wchar_t);
 	}
-	// if (flag == 1)
-	// 	info->width--;
 	if (ft_atoi(info->width) > 0)
 		apply_width(info);
 	if (flag == 1)

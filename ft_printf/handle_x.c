@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	apply_hash(i_cont *info, int flag, int iszero)
+static void	apply_hash(t_cont *info, int flag, int iszero)
 {
 	if (info->flags[f_Hash] == 1 && iszero != 1)
 	{
@@ -26,7 +26,7 @@ static void	apply_hash(i_cont *info, int flag, int iszero)
 	}
 }
 
-static void	apply_width(i_cont *info, int iszero)
+static void	apply_width(t_cont *info, int iszero)
 {
 	int len;
 
@@ -55,7 +55,7 @@ static void	apply_width(i_cont *info, int iszero)
 	apply_hash(info, 1, iszero);
 }
 
-static void	apply_precision(i_cont *info)
+static void	apply_precision(t_cont *info)
 {
 	int len;
 	int	iszero;
@@ -80,7 +80,7 @@ static void	apply_precision(i_cont *info)
 	apply_width(info, iszero);
 }
 
-void		handle_x(i_cont *info)
+void		handle_x(t_cont *info)
 {
 	if (info->length_mods[l_hh] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(

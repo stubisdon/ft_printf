@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	apply_width(i_cont *info)
+static void	apply_width(t_cont *info)
 {
 	int len;
 
@@ -37,7 +37,7 @@ static void	apply_width(i_cont *info)
 	}
 }
 
-static void	apply_precision(i_cont *info)
+static void	apply_precision(t_cont *info)
 {
 	int len;
 
@@ -51,7 +51,7 @@ static void	apply_precision(i_cont *info)
 	}
 }
 
-void		handle_u(i_cont *info)
+void		handle_u(t_cont *info)
 {
 	if (info->length_mods[l_hh] == 1)
 		info->res = ft_utoabaselonglong((unsigned long long int)va_arg(
