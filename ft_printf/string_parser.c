@@ -55,6 +55,8 @@ void parse_width(const char *format, i_cont *info)
 		if (*format == '0' && ft_isdigit(*(format - 1)) == 1)
 			info->width = ft_strcharjoin(info->width, *format);
 	}
+	if ((*format) == '*')
+		error_print(1);
 }
 
 void parse_precision(const char *format, i_cont *info)

@@ -6,7 +6,7 @@
 #    By: dkotov <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/03 16:09:53 by dkotov            #+#    #+#              #
-#    Updated: 2018/10/10 18:58:39 by dkotov           ###   ########.fr        #
+#    Updated: 2018/10/10 18:57:52 by dkotov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,3 +53,6 @@ fclean: clean
 
 re: fclean
 	make all
+
+test:
+	gcc -g ft_printf/*.c libft/*.c tests/main.c -fsanitize=address
