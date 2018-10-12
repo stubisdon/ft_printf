@@ -15,7 +15,7 @@
 # include <stdarg.h>
 # include <wchar.h>
 # include "../libft/libft.h"
-# define FLAGS 6
+# define FLAGS 7
 # define L_MODS 6
 
 
@@ -43,7 +43,8 @@ enum 				flags
 	f_Hash,
 	f_Space,
 	f_Dot,
-	f_Zero
+	f_Zero,
+	f_Aster
 };
 
 enum 				length_mods

@@ -101,7 +101,7 @@ void		handle_str(i_cont *info)
 
 	if (info->specifier == 's' && info->length_mods[l_l] != 1)
 	{
-		if ((sarg = va_arg(info->args[0], char*)))
+		if ((sarg = va_arg(info->args[0], char*)) && info->flags[f_Aster] != 1)
 			info->res = ft_strdup(sarg);
 		else
 			info->res = ft_strdup("(null)");

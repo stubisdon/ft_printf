@@ -56,7 +56,7 @@ void parse_width(const char *format, i_cont *info)
 			info->width = ft_strcharjoin(info->width, *format);
 	}
 	if ((*format) == '*')
-		error_print(1);
+		info->flags[f_Aster] = 1;
 }
 
 void parse_precision(const char *format, i_cont *info)
